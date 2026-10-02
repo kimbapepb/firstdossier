@@ -1,0 +1,91 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>EPB — Minister Briefing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+:root{--a:#BCC6D4;--b:#A8B2C1;--c:#8F9BAF;--d:#637284;--e:#4B5C78;--f:#3A4A61;--g:#2B3A48;--h:#1E2A38;--i:#131B2B}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;overflow-x:hidden}body{font-family:Helvetica,Arial,sans-serif;color:#fff;background:var(--i)}
+.app{max-width:900px;min-height:100svh;margin:auto;background:linear-gradient(145deg,var(--i),var(--h))}
+header{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:12px;padding:12px 18px;background:rgba(19,27,43,.95);border-bottom:1px solid #bcc6d429;backdrop-filter:blur(12px)}
+.avatar,.mini{border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--c),var(--e));font-family:'Bebas Neue';flex:none}.avatar{width:46px;height:46px;font-size:22px}.mini{width:27px;height:27px;font-size:12px}
+h1{font:400 25px/1 'Bebas Neue';letter-spacing:.04em;margin:0}.sub{margin:4px 0 0;color:var(--b);font-size:10px;letter-spacing:.13em;text-transform:uppercase}.secure{margin-left:auto;color:var(--b);font-size:9px;letter-spacing:.13em}
+#chat{padding:25px 20px 150px;display:flex;flex-direction:column;gap:9px;min-height:calc(100svh - 71px)}
+.row{display:flex;align-items:flex-end;gap:8px;animation:in .25s ease}.row.me{justify-content:flex-end}.bubble{max-width:78%;padding:11px 14px;border-radius:16px;font-size:14px;line-height:1.5}.them .bubble{background:var(--g);border:1px solid #bcc6d424;border-bottom-left-radius:4px}.me .bubble{background:var(--d);border-bottom-right-radius:4px}
+.typing{padding:13px 15px;background:var(--g);border-radius:16px;display:flex;gap:4px}.typing i{width:5px;height:5px;background:var(--b);border-radius:50%;animation:dot 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.actions{position:fixed;z-index:10;bottom:0;left:50%;transform:translateX(-50%);width:min(900px,100%);padding:12px 18px max(14px,env(safe-area-inset-bottom));background:linear-gradient(0deg,var(--i) 80%,transparent);display:none;gap:8px;flex-wrap:wrap}.actions.show{display:flex}
+.reply{flex:1 1 220px;min-height:46px;border:1px solid #bcc6d440;border-radius:12px;background:var(--g);color:white;padding:11px 14px;text-align:left;cursor:pointer}.reply:hover{background:var(--e)}
+.drive{display:block;text-decoration:none;color:white;margin-top:9px;padding:13px 14px;background:var(--f);border:1px solid #bcc6d438;border-radius:10px}.drive strong{display:block;font:400 20px 'Bebas Neue';letter-spacing:.05em}.drive small{color:var(--a);font-size:9px;letter-spacing:.1em}
+.end{margin:25px auto 0;color:var(--c);border:1px solid #bcc6d426;padding:10px 14px;font-size:9px;letter-spacing:.15em;text-transform:uppercase}
+@keyframes in{from{opacity:0;transform:translateY(7px)}}@keyframes dot{50%{opacity:.25;transform:translateY(-3px)}}
+@media(max-width:600px){header{padding:10px 12px}.avatar{width:40px;height:40px}h1{font-size:22px}.secure{display:none}#chat{padding:18px 11px 150px}.bubble{max-width:86%;font-size:13px;padding:10px 12px}.mini{width:24px;height:24px}.actions{padding-left:10px;padding-right:10px}.reply{flex-basis:100%;font-size:12px}}
+
+.avatar,.mini{overflow:hidden}
+.avatar img,.mini img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:700px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .app{width:100%;max-width:100%;min-height:100dvh}
+  header{
+    width:100%;padding:10px 12px;gap:10px;
+    padding-top:max(10px,env(safe-area-inset-top));
+  }
+  .avatar{width:42px;height:42px}
+  header>div:nth-child(2){min-width:0;flex:1}
+  h1{font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sub{font-size:8px;letter-spacing:.09em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .secure{display:block;font-size:7px;letter-spacing:.07em;white-space:nowrap;margin-left:4px}
+  #chat{
+    width:100%;padding:16px 10px 165px;
+    min-height:calc(100dvh - 63px);
+  }
+  .row{width:100%;gap:6px}
+  .row.me{padding-left:32px}
+  .row.them{padding-right:22px}
+  .bubble{
+    max-width:calc(100% - 34px);
+    min-width:0;font-size:13px;line-height:1.45;
+    padding:10px 11px;overflow-wrap:anywhere;
+  }
+  .me .bubble{max-width:90%}
+  .mini{width:24px;height:24px}
+  .drive{width:100%;padding:12px;margin-top:8px}
+  .drive strong{font-size:19px}
+  .drive small{font-size:8px;line-height:1.4}
+  .actions{
+    width:100%;left:0;transform:none;
+    padding:12px 10px max(12px,env(safe-area-inset-bottom));
+    gap:7px;
+  }
+  .reply{
+    width:100%;flex:1 1 100%;min-height:44px;
+    font-size:12px;line-height:1.35;padding:10px 12px;
+  }
+  .end{font-size:8px;line-height:1.5;margin:20px 12px 0}
+}
+@media(max-width:390px){
+  header{padding-left:9px;padding-right:9px}
+  .avatar{width:38px;height:38px}
+  h1{font-size:19px}
+  .sub{font-size:7.5px}
+  .secure{font-size:6.5px;max-width:72px;white-space:normal;text-align:right;line-height:1.25}
+  #chat{padding-left:8px;padding-right:8px}
+  .bubble{font-size:12.5px}
+}
+
+</style></head><body>
+<div class="app"><header><div class="avatar"><img src="Minister.png" alt="Minister of Education"></div><div><h1>Minister of Education</h1><p class="sub">Koko Krunch · Elite Protection Bureau</p></div><span class="secure">EPBureaus Channel</span></header><main id="chat"></main></div><div class="actions" id="actions"></div>
+<script>
+const C=document.getElementById('chat'),A=document.getElementById('actions'),sleep=n=>new Promise(r=>setTimeout(r,n));let ended=false;
+function scroll(){setTimeout(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}),50)}
+function msg(t,w='them',extra=''){let r=document.createElement('div');r.className='row '+w;if(w==='them'){let av=document.createElement('div');av.className='mini';av.innerHTML='<img src="Minister.png" alt="">';r.appendChild(av)}let b=document.createElement('div');b.className='bubble';b.innerHTML=t+extra;r.appendChild(b);C.appendChild(r);scroll()}
+function typing(){let r=document.createElement('div');r.className='row them';r.innerHTML='<div class="mini"><img src="Minister.png" alt=""></div><div class="typing"><i></i><i></i><i></i></div>';C.appendChild(r);scroll();return r}
+async function minister(t,extra=''){let x=typing();await sleep(520);x.remove();msg(t,'them',extra);await sleep(220)}
+function choose(xs){A.innerHTML='';A.classList.add('show');xs.forEach(x=>{let b=document.createElement('button');b.className='reply';b.textContent=x[0];b.onclick=()=>{if(ended)return;A.classList.remove('show');A.innerHTML='';msg(x[0],'me');x[1]()};A.appendChild(b)});scroll()}
+const D={field:'https://drive.google.com/file/d/19PsqVjt_LOJCTkzhcx0-2DaXwNyQ7jXb/view?usp=sharing',counsel:'https://drive.google.com/file/d/1EOEOsXOOGEoKW6jSBpco07PEWy5IcKif/view?usp=sharing',cyber:'https://drive.google.com/file/d/1dDI11jHfIX-KHWINYg1m6y_xlDTbUGFm/view?usp=sharing',archive:'https://drive.google.com/file/d/1qzqx2PWd7bLH2VZZ-zYNDE-rKsH7RcBA/view?usp=sharing'};
+const card=(n,u)=>`<a class="drive" href="${u}" target="_blank" rel="noopener"><strong>${n}</strong><small>ACCESS ASSIGNMENT TEMPLATE ↗</small></a>`;
+async function start(){await minister('Selamat karena sudah menjadi Rookies. Suatu hal yang menyenangkan bisa bertemu dengan kalian semua.');choose([['Terima kasih, Pak!',p2]])}
+async function p2(){await minister('Saya mengerti mungkin ke depannya tidak akan mudah untuk kalian.');await minister('Akan ada banyak hal yang akan kalian hadapi, termasuk bahaya itu sendiri.');await minister('Tapi saya akan terus memantau kalian, tenang saja. Saya tidak akan membiarkan kalian masuk ke dalam bahaya.');choose([['Saya mengerti.',p3]])}
+async function p3(){await minister('Saya ingin menyampaikan tugas pertama kalian, Rookies.');await minister('Setelah bergabung ke dalam Bureau, kalian harus mengenal satu sama lain.');await minister('Namun, saya tidak menyukai cara perkenalan yang biasa.');choose([['Bagaimana yang Anda maksud, Pak?',p4],['Ya, Pak?',p4]])}
+async function p4(){await minister('Saya ingin kalian berkenalan dengan cara satu hari satu unit.');await minister('Pertama kalian harus mengambil template sesuai dengan unit kalian.');await minister('Field Agent Unit, kalian dapat mengakses melalui bagian ini.',card('FIELD AGENT UNIT',D.field));await minister('Counseling Unit, ini adalah bagian kalian.',card('COUNSELING UNIT',D.counsel));await minister('Kemudian, Cyber Unit, kalian harus mengerjakan ini.',card('CYBER UNIT',D.cyber));await minister('Terakhir, Archive Unit, ini tugas kalian.',card('ARCHIVE UNIT',D.archive));choose([['Baiklah, saya mengerti.',p5]])}
+async function p5(){await minister('Saya menginginkan kalian untuk berbincang dengan baik, tidak ada satu pun yang boleh convokill.');await minister('Saya akan selalu mengawasi Anda, ingat.');choose([['Terkesan menyeramkan, ya.',()=>branch(1)],['B-baiklah.',()=>branch(2)]])}
+async function branch(n){if(n===1)await minister('Itu bukanlah hal yang menyeramkan. Itu sudah tanggung jawab saya.');else await minister('Hahaha! Tidak perlu sungkan, saya tidak akan memarahi Anda jika Anda melakukannya dengan baik.');end()}
+async function end(){await minister('Kalian harus membuat greetings tersebut sebelum giliran kalian. Giliran tersebut akan dimulai pada Selasa, 6 Oktober 2026.');await minister('Apabila sudah, kalian bisa mengakses checklist di <strong>(link menyusul)</strong>. Checklist apabila kalian sudah merespons di greetings temannya.');await minister('Semua ini dapat kalian jadikan bahan interaksi harian.');await minister('Saya juga berharap kalian dapat terus menjalin persahabatan di sini.');await minister('Jika kalian butuh apa pun, kalian bisa menghubungi Inspectors.');await minister('Saya harap, greetings ini dikumpulkan paling lambat pada Minggu, 11 Oktober 2026 pukul 22.00 (GMT +7).');await minister('Saya tidak menerima keterlambatan. Namun, kalian dapat berdiskusi lebih lanjut dengan Inspectors apabila ada kendala apa pun.');await minister('Sampai jumpa lagi di lain waktu, Rookies.');ended=true;let e=document.createElement('div');e.className='end';e.textContent='Conversation ended · replies disabled';C.appendChild(e);scroll()}
+window.addEventListener('load',()=>setTimeout(start,350));
+</script></body></html>
